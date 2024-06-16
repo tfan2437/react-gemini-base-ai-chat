@@ -1,7 +1,16 @@
 import "./Main.css";
 import { assets } from "../../assets/assets";
+import { useState } from "react";
+import runChat from "../../config/gemini";
 
 const Main = () => {
+  const [inputPrompt, setInputPrompt] = useState("");
+
+  const handleGenerative = async (e) => {
+    e.preventDefault();
+    await runChat(inputPrompt);
+  };
+
   return (
     <div className="main">
       <div className="nav">
@@ -36,12 +45,18 @@ const Main = () => {
         </div>
         <div className="main-bottom">
           <div className="search-box">
-            <input type="text" placeholder="Enter a prompt here" />
+            <input
+              type="text"
+              placeholder="Enter a prompt here"
+              value={inputPrompt}
+              onChange={(e) => setInputPrompt(e.target.value)}
+            />
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
               <img src={assets.send_icon} alt="" />
             </div>
+            <button onClick={(e) => handleGenerative(e)}>Generative</button>
           </div>
           <p className="bottom-info">
             Gemini may display inaccurate info, including about people, so
