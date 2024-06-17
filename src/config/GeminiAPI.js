@@ -29,7 +29,8 @@ const runChat = async (prompt) => {
 
   const result = await chatSession.sendMessage(prompt);
   console.log(result.response.text());
-  console.log("Request Success");
+  console.log("Gemini API request success");
+  return result.response.text();
 };
 
 export default runChat;
